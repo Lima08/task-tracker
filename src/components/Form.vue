@@ -13,9 +13,7 @@
             <div class="column">
                 <div
                     class="is-flex is-align-items-center is-justify-content-space-between">
-                    <section>
-                        <strong>{{ timer }}</strong>
-                    </section>
+                    <StopWatch :seconds="seconds" />
                     <button class="button" @click="start">
                         <span class="icon">
                             <i class="fas fa-play"></i>
@@ -36,20 +34,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import StopWatch from './StopWatch.vue';
+
 export default defineComponent({
     name: 'FormComponent',
+    components: {
+        StopWatch,
+    },
     data() {
         return {
             seconds: 0,
             stopWatch: 0,
         };
-    },
-    computed: {
-        timer(): string {
-            return new Date(this.seconds * 1000)
-                .toISOString()
-                .substring(11, 19);
-        },
     },
     methods: {
         start() {
