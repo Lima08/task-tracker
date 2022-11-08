@@ -14,15 +14,15 @@
                 <div
                     class="is-flex is-align-items-center is-justify-content-space-between">
                     <section>
-                        <strong>{{ tempoDecorrido }}</strong>
+                        <strong>{{ timer }}</strong>
                     </section>
-                    <button class="button" @click="iniciar">
+                    <button class="button" @click="start">
                         <span class="icon">
                             <i class="fas fa-play"></i>
                         </span>
                         <span>Play</span>
                     </button>
-                    <button class="button" @click="parar">
+                    <button class="button" @click="stop">
                         <span class="icon">
                             <i class="fas fa-stop"></i>
                         </span>
@@ -37,28 +37,28 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-    name: 'FormularioComponent',
+    name: 'FormComponent',
     data() {
         return {
-            tempoEmSegundos: 0,
-            cronometro: 0,
+            seconds: 0,
+            stopWatch: 0,
         };
     },
     computed: {
-        tempoDecorrido(): string {
-            return new Date(this.tempoEmSegundos * 1000)
+        timer(): string {
+            return new Date(this.seconds * 1000)
                 .toISOString()
                 .substring(11, 19);
         },
     },
     methods: {
-        iniciar() {
-            this.cronometro = setInterval(() => {
-                this.tempoEmSegundos += 1;
+        start() {
+            this.stopWatch = setInterval(() => {
+                this.seconds += 1;
             }, 1000);
         },
-        parar() {
-            clearInterval(this.cronometro);
+        stop() {
+            clearInterval(this.stopWatch);
         },
     },
 });
